@@ -1,0 +1,75 @@
+[tool.poetry]
+name = "rag-knowledge-base"
+version = "0.1.0"
+description = "RAG система поиска по базе знаний компании"
+authors = ["Artem Kiryushin"]
+
+packages = [
+	{ include = "app" }
+]
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.1"
+uvicorn = {extras = ["standard"], version = "^0.24.0"}
+langchain = "^0.1.0"
+langchain-openai = "^0.0.2"
+langchain-community = "^0.0.10"
+chromadb = "^0.4.18"
+openai = "^1.6.1"
+pydantic = "^2.5.2"
+pydantic-settings = "^2.1.0"
+python-dotenv = "^1.0.0"
+tiktoken = "^0.5.2"
+aiofiles = "^23.2.1"
+httpx = "^0.25.2"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.11.0"
+isort = "^5.12.0"
+ruff = "^0.1.7"
+mypy = "^1.7.1"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "D", "UP", "B", "A", "C4", "T20", "Q", "RUF"]
+ignore = [
+    "B008", # Зависимости FastAPI через Depends
+    "D100", # Нет докстринга в публичном модуле
+    "D103", # Нет докстринга в функции main
+    "D104", # Нет докстринга в публичном пакете
+    "D105", # Нет докстринга в магическом методе
+    "D107", # Нет докстринга в __init__
+    "D203", # Одна пустая строка перед классом (конфликтует с D211)
+    "D205", # Требуется одна пустая строка между сводкой и описанием
+    "D210", # Пробелы не допускаются в тексте докстринга
+    "D212", # Многострочный докстринг должен начинаться после определения объекта
+    "D400", # В конце первой строки докстринга должна быть точка
+    "D415", # В конце первой строки докстринга должна быть '.', '?', '!'
+    "E501", # Превышена максимальная длина строки
+    "N818", # Исключения должны заканчиваться на Error
+    "RUF001", # Неоднозначный юникод-символ
+    "RUF002", # Неоднозначный юникод-символ
+    "RUF003", # Комментарий содержит неоднозначный символ
+]
+exclude = [".venv", "__pycache__", "build", "dist"]
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+strict = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
